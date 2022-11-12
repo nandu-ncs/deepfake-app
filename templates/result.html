@@ -44,20 +44,20 @@
     </header>
     <!-- //header -->
     <!--  Main banner section -->
-    <section class="w3l-main-banner" style="height:660px;">
-      <div class="banner-view">
-        <div class="banner-info container">
-          <h3 class="banner-text">Real<small>vs</small>Fake</h3>
-          <p class="mt-3 mb-5" id="file">Upload a file to check.</p><br>
-          <a href="javascript:;" onclick={document.getElementById('upload').click();} class="btn btn-light btn-style mr-3">Browse</a>
-          <a href="javascript:;" id="predict" class="btn btn-outline-light btn-style">Upload</a><br>
-          <input type="file" id="upload" style="display:none;">
+    
+    <section class="w3l-about-bottom py-5" id="about">
+        <div class="container py-lg-5 py-md-3">
+            <div class="row middle-grids">
+                <div class="col-lg-12 advantage-grid-info">
+                    <div >
+                        {% if res %}  
+                        {{res}}
+                        {% endif %}  
+                    </div>
+                    <a href={{ url_for('index') }} class="btn-style btn-primary btn mt-lg-5 mt-4" style="display:block;margin: auto;width: fit-content;">Back to Home</a>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <div id='stars'></div>
-      <div id='stars2'></div>
-      <div id='stars3'></div>
     </section>
     <!--  //Main banner section -->
 
@@ -126,42 +126,7 @@
 <script>
   $(document).ready(function () {
 
-    $(upload).change(function () {
-      if(document.getElementById('upload').value=="")
-        document.getElementById('file').innerHTML="Upload a file to check.";
-      else
-        document.getElementById('file').innerHTML="File uploaded : "+document.getElementById('upload').files[0].name;
-    });
-
-    $(predict).click(function () {
-        var file = document.getElementById('upload').files[0];
-
-        var formData = new FormData();
-        formData.append('file', file);
-
-        console.log('st');
-
-        $.ajax({
-            url: "/upload",
-            type: "post",
-            data: formData,
-            contentType: false,
-            processData: false,
-            beforeSend: function(){
-                Swal.fire({
-                    title:"File uploading...",
-                    allowOutsideClick:false,
-                    allowEscapeKey:false,});
-                Swal.showLoading();
-            },
-            success: function(res){
-                console.log(res);
-                Swal.close();
-                window.location.href='{{ url_for('page2') }}' ;
-
-            }
-        });
-    });
+    
 
     var owl = $('.owl-carousel');
     owl.owlCarousel({

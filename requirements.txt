@@ -1,1 +1,8 @@
 flask
+efficientnet_pytorch
+torch
+matplotlib
+scipy
+oprncv-python
+torchvision
+albumentations
